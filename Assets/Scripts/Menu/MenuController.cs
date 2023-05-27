@@ -19,6 +19,9 @@ public class MenuController : MonoBehaviour
 
     public void NewGameDialogYes()
     {
+        JsonHandler handler = gameObject.AddComponent<JsonHandler>();
+        handler.data = new SavedPositionData();
+        handler.Save();
         SceneManager.LoadScene(_newGameLevel);
     }
 

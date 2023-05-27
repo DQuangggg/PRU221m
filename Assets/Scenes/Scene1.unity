@@ -822,7 +822,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2709253135954823513, guid: 56c5c8b58fdd07448bd4d48e99bccc78, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2709253135954823513, guid: 56c5c8b58fdd07448bd4d48e99bccc78, type: 3}
       propertyPath: m_LocalScale.x
@@ -2556,9 +2556,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 50892052}
+      - m_Target: {fileID: 946793303}
         m_TargetAssemblyTypeName: CharacterController, Assembly-CSharp
-        m_MethodName: ToggleMusic
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3714,8 +3714,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 50892052}
-        m_TargetAssemblyTypeName: CharacterController, Assembly-CSharp
+      - m_Target: {fileID: 946793308}
+        m_TargetAssemblyTypeName: PauseController, Assembly-CSharp
         m_MethodName: GoToMenu
         m_Mode: 1
         m_Arguments:
@@ -4103,8 +4103,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 50892052}
-        m_TargetAssemblyTypeName: CharacterController, Assembly-CSharp
+      - m_Target: {fileID: 946793308}
+        m_TargetAssemblyTypeName: PauseController, Assembly-CSharp
         m_MethodName: replay
         m_Mode: 1
         m_Arguments:
@@ -4239,37 +4239,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8619638075219534905, guid: 575e9b663603d1f4695c6497b0555494, type: 3}
   m_PrefabInstance: {fileID: 1440468697}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &670333508
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 670333509}
-  m_Layer: 0
-  m_Name: JsonHandler
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &670333509
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 670333508}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.212965, y: 0.9986522, z: -0.050404318}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &680064753
 GameObject:
   m_ObjectHideFlags: 0
@@ -5138,8 +5107,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 50892052}
-        m_TargetAssemblyTypeName: CharacterController, Assembly-CSharp
+      - m_Target: {fileID: 946793308}
+        m_TargetAssemblyTypeName: PauseController, Assembly-CSharp
         m_MethodName: replay
         m_Mode: 1
         m_Arguments:
@@ -6127,6 +6096,7 @@ GameObject:
   - component: {fileID: 946793307}
   - component: {fileID: 946793306}
   - component: {fileID: 946793305}
+  - component: {fileID: 946793308}
   m_Layer: 0
   m_Name: Pause
   m_TagString: Untagged
@@ -6198,8 +6168,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 50892052}
-        m_TargetAssemblyTypeName: CharacterController, Assembly-CSharp
+      - m_Target: {fileID: 946793308}
+        m_TargetAssemblyTypeName: PauseController, Assembly-CSharp
         m_MethodName: pauseGame
         m_Mode: 1
         m_Arguments:
@@ -6248,6 +6218,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 946793303}
   m_CullTransparentMesh: 1
+--- !u!114 &946793308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946793303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8985733902777349800b56fd6d20679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenuScreen: {fileID: 351320888}
 --- !u!1 &967724429
 GameObject:
   m_ObjectHideFlags: 0
@@ -6836,8 +6819,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 50892052}
-        m_TargetAssemblyTypeName: CharacterController, Assembly-CSharp
+      - m_Target: {fileID: 946793308}
+        m_TargetAssemblyTypeName: PauseController, Assembly-CSharp
         m_MethodName: GoToMenu
         m_Mode: 1
         m_Arguments:
@@ -7180,8 +7163,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 50892052}
-        m_TargetAssemblyTypeName: CharacterController, Assembly-CSharp
+      - m_Target: {fileID: 946793308}
+        m_TargetAssemblyTypeName: PauseController, Assembly-CSharp
         m_MethodName: GoToMenu
         m_Mode: 1
         m_Arguments:
@@ -7440,8 +7423,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 50892052}
-        m_TargetAssemblyTypeName: CharacterController, Assembly-CSharp
+      - m_Target: {fileID: 946793308}
+        m_TargetAssemblyTypeName: PauseController, Assembly-CSharp
         m_MethodName: replay
         m_Mode: 1
         m_Arguments:
@@ -7873,7 +7856,7 @@ Transform:
   m_Children:
   - {fileID: 1391424264}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1315971293
 MonoBehaviour:
@@ -8435,8 +8418,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 50892052}
-        m_TargetAssemblyTypeName: CharacterController, Assembly-CSharp
+      - m_Target: {fileID: 946793308}
+        m_TargetAssemblyTypeName: PauseController, Assembly-CSharp
         m_MethodName: ResumeGame
         m_Mode: 1
         m_Arguments:
@@ -9548,8 +9531,6 @@ MonoBehaviour:
   - {fileID: 1558750019}
   - {fileID: 132152655}
   - {fileID: 2006956325}
-  fullHealth: {fileID: 1030976807, guid: 3e255511f5a752245918c4eb10e3340e, type: 3}
-  emptyHealth: {fileID: 1927556350, guid: 3e255511f5a752245918c4eb10e3340e, type: 3}
   health: 0
   SceneName: Scene1
 --- !u!114 &1469840376
@@ -39853,7 +39834,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 855165375283242986, guid: 3ae03db993af27c4d8f359c280e9b7f4, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 855165375283242986, guid: 3ae03db993af27c4d8f359c280e9b7f4, type: 3}
       propertyPath: m_LocalScale.x
@@ -39922,7 +39903,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2709253135954823513, guid: 56c5c8b58fdd07448bd4d48e99bccc78, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2709253135954823513, guid: 56c5c8b58fdd07448bd4d48e99bccc78, type: 3}
       propertyPath: m_LocalScale.x
@@ -40145,7 +40126,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1345563991534421001, guid: 0c9a69fcaf3d8164d8a832c96dac6f3e, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1345563991534421001, guid: 0c9a69fcaf3d8164d8a832c96dac6f3e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -40215,6 +40196,10 @@ PrefabInstance:
     - target: {fileID: 7858948929064552178, guid: 433967442cc91e948a4fcff9befc83d5, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 334.98575
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858948929064552179, guid: 433967442cc91e948a4fcff9befc83d5, type: 3}
+      propertyPath: m_Name
+      value: Menu
       objectReference: {fileID: 0}
     - target: {fileID: 7858948929396060488, guid: 433967442cc91e948a4fcff9befc83d5, type: 3}
       propertyPath: characterController
@@ -40304,7 +40289,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8865121132199743976, guid: 0bfaa6ff839324b4ab346d3b7d36590c, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8865121132199743976, guid: 0bfaa6ff839324b4ab346d3b7d36590c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -40324,15 +40309,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8865121132199743976, guid: 0bfaa6ff839324b4ab346d3b7d36590c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8865121132199743976, guid: 0bfaa6ff839324b4ab346d3b7d36590c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8865121132199743976, guid: 0bfaa6ff839324b4ab346d3b7d36590c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8865121132199743976, guid: 0bfaa6ff839324b4ab346d3b7d36590c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

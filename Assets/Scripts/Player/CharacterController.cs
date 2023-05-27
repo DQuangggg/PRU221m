@@ -18,6 +18,8 @@ public class CharacterController : MonoBehaviour
     Animator animator;
     Rigidbody2D rb;
 
+    public GameObject gameOverScreen;
+
     public AudioSource audioSource;
     [Header("SoundFX")]
     [SerializeField]
@@ -29,33 +31,28 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     public AudioSource backGroundClip;
 
-    SpawPoint spawPoint;
-    SpawPoint spawPoint1;
-
     public int hearts = 5;
 
-    public GameObject pauseMenuScreen;
-    public GameObject gameOverScreen;
+
     AudioManager audioManager;
 
-    public HeartManager heartManager;
+    private HeartManager heartManager;
     public Vector3 checkPointPassed;
 
     private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-
     }
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
         facingRight = true;
+
         audioSource = gameObject.GetComponent<AudioSource>();
         backGroundClip.Play();
-        spawPoint = GameObject.FindGameObjectWithTag("SpawnPoint").GetComponent<SpawPoint>();
-        spawPoint1 = GameObject.FindGameObjectWithTag("SpawnPoint1").GetComponent<SpawPoint>();
         Time.timeScale = 1;
 
         heartManager = gameObject.GetComponent<HeartManager>();
@@ -67,7 +64,6 @@ public class CharacterController : MonoBehaviour
         animator.SetFloat("speed", Mathf.Abs(horizontalMove));
 
         rb.velocity = new Vector2(horizontalMove * speed, rb.velocity.y);
-
 
         if (horizontalMove > 0 && !facingRight)
         {
@@ -145,6 +141,12 @@ public class CharacterController : MonoBehaviour
 
     }
 
+    public void GameOver()
+    {
+        Time.timeScale = 0;
+        gameOverScreen.SetActive(true);
+    }
+
     void CheckpointRespawn()
     {
         //respawn
@@ -152,51 +154,4 @@ public class CharacterController : MonoBehaviour
         //minus HP
         heartManager.MinusHeart();
     }
-
-    public void nextLevel()
-    {
-        var currentScene = SceneManager.GetActiveScene().buildIndex;
-        if (currentScene == 4)
-        {
-            SceneManager.LoadScene("MainMenu");
-        }
-        else
-        {
-            SceneManager.LoadSceneAsync(++currentScene);
-        }
-    }
-
-    public void GameOver()
-    {
-        Time.timeScale = 0;
-        gameOverScreen.SetActive(true);
-    }
-
-    public void pauseGame()
-    {
-        Time.timeScale = 0;
-        pauseMenuScreen.SetActive(true);
-    }
-
-    public void ResumeGame()
-    {
-        Time.timeScale = 1;
-        pauseMenuScreen.SetActive(false);
-    }
-    public void GoToMenu()
-    {
-        JsonHandler handler = gameObject.AddComponent<JsonHandler>();
-        handler.data = new SavedPositionData();
-        handler.Save();
-        SceneManager.LoadScene("MainMenu");
-    }
-
-    public void replay()
-    {
-        JsonHandler handler = gameObject.AddComponent<JsonHandler>();
-        handler.data = new SavedPositionData();
-        handler.Save();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
 }
