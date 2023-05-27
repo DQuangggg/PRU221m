@@ -38,6 +38,9 @@ public class CharacterController : MonoBehaviour
     public GameObject gameOverScreen;
     AudioManager audioManager;
 
+    public HeartManager heartManager;
+    public Vector3 checkPointPassed;
+
     private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
@@ -55,6 +58,7 @@ public class CharacterController : MonoBehaviour
         spawPoint1 = GameObject.FindGameObjectWithTag("SpawnPoint1").GetComponent<SpawPoint>();
         Time.timeScale = 1;
 
+        heartManager = gameObject.GetComponent<HeartManager>();
     }
 
     void FixedUpdate()
@@ -125,8 +129,8 @@ public class CharacterController : MonoBehaviour
             //stop all movement on main character
             rb.bodyType = RigidbodyType2D.Static;
             yield return new WaitForSeconds(0.5f);
-            hearts--;
-            if (hearts <= 0)
+            //heartManager.health--;
+            if (heartManager.health <= 0)
             {
                 backGroundClip.Stop();
                 audioManager.PlaySFX(audioManager.gameover);
@@ -135,18 +139,27 @@ public class CharacterController : MonoBehaviour
             else
             {
                 animator.SetBool("dead", false);
-                if (transform.position.x >= spawPoint1.transform.position.x)
-                {
-                    transform.position = new Vector3(spawPoint1.transform.position.x, spawPoint1.transform.position.y, 0);
-                }
-                else
-                {
-                    transform.position = new Vector3(spawPoint.transform.position.x, spawPoint.transform.position.y, 0);
-                }
+                //if (transform.position.x >= spawPoint1.transform.position.x)
+                //{
+                //    transform.position = new Vector3(spawPoint1.transform.position.x, spawPoint1.transform.position.y, 0);
+                //}
+                //else
+                //{
+                //    transform.position = new Vector3(spawPoint.transform.position.x, spawPoint.transform.position.y, 0);
+                //}
+                CheckpointRespawn();
                 rb.bodyType = RigidbodyType2D.Dynamic;
             }
         }
 
+    }
+
+    void CheckpointRespawn()
+    {
+        //respawn
+        transform.position = new Vector3(checkPointPassed.x, checkPointPassed.y, 0);
+        //minus HP
+        heartManager.MinusHeart();
     }
 
     public void nextLevel()

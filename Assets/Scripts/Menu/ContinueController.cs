@@ -1,37 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.Audio;
-using System;
 
-public class MenuController : MonoBehaviour
+public class ContinueController : MonoBehaviour
 {
-    [Header("Levels To Load")]
-    public string _newGameLevel, _newLevel;
+    public static int _lastSceneIndex;
 
-
-    private void Start()
+    public void loadSceneByIndex(int index)
     {
-        Time.timeScale = 1;
+        SceneManager.LoadSceneAsync(index);
     }
-
-    public void NewGameDialogYes()
+    void Awake()
     {
-        SceneManager.LoadScene(_newGameLevel);
     }
-
-    public void NewLevel()
-    {
-        SceneManager.LoadScene(_newLevel);
-    }
-
-    public void ExitButton()
-    {
-        Application.Quit();
-    }
-
     public void loadSceneByName(string name)
     {
         SceneManager.LoadSceneAsync(name);
