@@ -18,18 +18,12 @@ public class HeartManager : MonoBehaviour
     public int numOfHearts;
 
     public GameObject[] heartss;
-    [SerializeField]
-    public Sprite fullHealth;
-    [SerializeField]
-    public Sprite emptyHealth;
 
     public int health = 0;
     public string SceneName;
 
     void Start()
     {
-        //characterController = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
-
         //Read data from File
         try
         {
@@ -75,11 +69,9 @@ public class HeartManager : MonoBehaviour
             if (i < health)
             {
                 heartss[i].GetComponent<SpriteRenderer>().enabled = true;
-                //hearts[i].GetComponent<SpriteRenderer>().sprite = fullHealth;
             }
             else
             {
-                //hearts[i].GetComponent<SpriteRenderer>().sprite = emptyHealth;
                 heartss[i].GetComponent<SpriteRenderer>().enabled = false;
             }
         }

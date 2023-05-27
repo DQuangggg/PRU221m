@@ -129,7 +129,6 @@ public class CharacterController : MonoBehaviour
             //stop all movement on main character
             rb.bodyType = RigidbodyType2D.Static;
             yield return new WaitForSeconds(0.5f);
-            //heartManager.health--;
             if (heartManager.health <= 0)
             {
                 backGroundClip.Stop();
@@ -139,14 +138,6 @@ public class CharacterController : MonoBehaviour
             else
             {
                 animator.SetBool("dead", false);
-                //if (transform.position.x >= spawPoint1.transform.position.x)
-                //{
-                //    transform.position = new Vector3(spawPoint1.transform.position.x, spawPoint1.transform.position.y, 0);
-                //}
-                //else
-                //{
-                //    transform.position = new Vector3(spawPoint.transform.position.x, spawPoint.transform.position.y, 0);
-                //}
                 CheckpointRespawn();
                 rb.bodyType = RigidbodyType2D.Dynamic;
             }
@@ -194,11 +185,17 @@ public class CharacterController : MonoBehaviour
     }
     public void GoToMenu()
     {
+        JsonHandler handler = gameObject.AddComponent<JsonHandler>();
+        handler.data = new SavedPositionData();
+        handler.Save();
         SceneManager.LoadScene("MainMenu");
     }
 
     public void replay()
     {
+        JsonHandler handler = gameObject.AddComponent<JsonHandler>();
+        handler.data = new SavedPositionData();
+        handler.Save();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

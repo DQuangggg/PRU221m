@@ -58,5 +58,4 @@ public class MenuController : MonoBehaviour
             loadSceneByName("Scene1");
         }
     }
-
 }
