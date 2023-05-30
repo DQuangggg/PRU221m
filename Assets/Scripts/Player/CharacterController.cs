@@ -33,7 +33,6 @@ public class CharacterController : MonoBehaviour
 
     public int hearts = 5;
 
-
     AudioManager audioManager;
 
     private HeartManager heartManager;
@@ -63,7 +62,8 @@ public class CharacterController : MonoBehaviour
         horizontalMove = Input.GetAxisRaw("Horizontal");
         animator.SetFloat("speed", Mathf.Abs(horizontalMove));
 
-        rb.velocity = new Vector2(horizontalMove * speed, rb.velocity.y);
+         rb.velocity = new Vector2(horizontalMove * speed, rb.velocity.y);
+        //transform.position += new Vector3(horizontalMove * speed * Time.deltaTime, 0, 0);
 
         if (horizontalMove > 0 && !facingRight)
         {
