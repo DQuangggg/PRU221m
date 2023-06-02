@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -24,32 +25,43 @@ public class JsonHandler : MonoBehaviour
 
     private void WriteToFile(string fileName, string json)
     {
-        string path = GetFilePath(fileName);
-        FileStream fileStream = new FileStream(path, FileMode.Create);
-
-        using (StreamWriter writer = new StreamWriter(fileStream))
+        try
         {
-            writer.Write(json);
+            string path = GetFilePath(fileName);
+            FileStream fileStream = new FileStream(path, FileMode.Create);
+
+            using (StreamWriter writer = new StreamWriter(fileStream))
+            {
+                writer.Write(json);
+            }
         }
+        catch (Exception ex)
+        {
+            Debug.Log(ex.ToString());
+        }
+
+
     }
 
     private string ReadFromFile(string fileName)
     {
-        string path = GetFilePath(fileName);
-        if (File.Exists(path))
+        try
         {
-            using (StreamReader reader = new StreamReader(path))
+            string path = GetFilePath(fileName);
+            if (File.Exists(path))
             {
-                string json = reader.ReadToEnd();
-                return json;
+                using (StreamReader reader = new StreamReader(path))
+                {
+                    string json = reader.ReadToEnd();
+                    return json;
+                }
             }
-        }
-        else
+        }catch(Exception ex)
         {
-            Debug.LogWarning("File not found");
-            //throw exception to handle
-            throw new System.Exception("File not found");
+            Debug.Log(ex.ToString());
         }
+        return "";
+        
     }
 
     private string GetFilePath(string fileName)

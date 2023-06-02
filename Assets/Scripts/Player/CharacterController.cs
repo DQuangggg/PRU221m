@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public class CharacterController : MonoBehaviour
 {
+    public static CharacterController Instance;
     [SerializeField] private float speed;
     [SerializeField] private float jump;
     public GameObject BloodEffect;
@@ -20,16 +21,7 @@ public class CharacterController : MonoBehaviour
 
     public GameObject gameOverScreen;
 
-    public AudioSource audioSource;
-    [Header("SoundFX")]
-    [SerializeField]
-    public AudioClip jumpClip;
-    [SerializeField]
-    public AudioClip deathClip;
-    [SerializeField]
-    public AudioClip gameOverClip;
-    [SerializeField]
-    public AudioSource backGroundClip;
+
 
     public int hearts = 5;
 
@@ -40,9 +32,29 @@ public class CharacterController : MonoBehaviour
 
     private void Awake()
     {
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        if (Instance != null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Instance = new CharacterController();
+        }
+        audioManager = FindObjectOfType<AudioManager>();
+    }
+    public Transform getTranform()
+    {
+        return gameObject.transform;
+    }
+    public Object getBlood()
+    {
+        return BloodEffect;
     }
 
+    public void SetBodyType(RigidbodyType2D type)
+    {
+        rb.bodyType = type;
+    }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -50,19 +62,22 @@ public class CharacterController : MonoBehaviour
 
         facingRight = true;
 
-        audioSource = gameObject.GetComponent<AudioSource>();
-        backGroundClip.Play();
+        audioManager.PlayMusicBackground(true);
         Time.timeScale = 1;
 
         heartManager = gameObject.GetComponent<HeartManager>();
     }
-
+    public void SetDead(bool status)
+    {
+        animator = GetComponent<Animator>();
+        animator.SetBool("dead", status);
+    }
     void FixedUpdate()
     {
         horizontalMove = Input.GetAxisRaw("Horizontal");
         animator.SetFloat("speed", Mathf.Abs(horizontalMove));
 
-         rb.velocity = new Vector2(horizontalMove * speed, rb.velocity.y);
+        rb.velocity = new Vector2(horizontalMove * speed, rb.velocity.y);
         //transform.position += new Vector3(horizontalMove * speed * Time.deltaTime, 0, 0);
 
         if (horizontalMove > 0 && !facingRight)
@@ -80,7 +95,6 @@ public class CharacterController : MonoBehaviour
             {
                 animator.SetBool("jump", true);
                 grounded = false;
-                //audioSource.PlayOneShot(jumpClip);
                 audioManager.PlaySFX(audioManager.jump);
                 rb.velocity = new Vector2(rb.velocity.x, jump);
             }
@@ -90,7 +104,6 @@ public class CharacterController : MonoBehaviour
             animator.SetBool("jump", false);
         }
     }
-
     void flip()
     {
         facingRight = !facingRight;
@@ -106,52 +119,9 @@ public class CharacterController : MonoBehaviour
             grounded = true;
 
         }
-        if (collision.gameObject.tag == "Trap")
-        {
-            animator.SetBool("dead", true);
-            Instantiate(BloodEffect, transform.position, transform.rotation);
-            //audioSource.PlayOneShot(deathClip);
-            audioManager.PlaySFX(audioManager.dead2);
-            StartCoroutine(waiter());
-        }
-        if (collision.gameObject.tag == "Boos") {
-            backGroundClip.Stop();
-            audioManager.PlaySFX(audioManager.gameover);
-            GameOver();
-        }
-
-        IEnumerator waiter()
-        {
-            //stop all movement on main character
-            rb.bodyType = RigidbodyType2D.Static;
-            yield return new WaitForSeconds(0.5f);
-            if (heartManager.health <= 0)
-            {
-                backGroundClip.Stop();
-                audioManager.PlaySFX(audioManager.gameover);
-                GameOver();
-            }
-            else
-            {
-                animator.SetBool("dead", false);
-                CheckpointRespawn();
-                rb.bodyType = RigidbodyType2D.Dynamic;
-            }
-        }
-
     }
-
-    public void GameOver()
+    public Vector3 getCheckPointPassed()
     {
-        Time.timeScale = 0;
-        gameOverScreen.SetActive(true);
-    }
-
-    void CheckpointRespawn()
-    {
-        //respawn
-        transform.position = new Vector3(checkPointPassed.x, checkPointPassed.y, 0);
-        //minus HP
-        heartManager.MinusHeart();
+        return checkPointPassed;
     }
 }

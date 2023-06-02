@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager Instance;
     public Sound[] musicSounds, sfxSounds;
 
     [SerializeField] AudioSource musicSource, sfxSource;
@@ -17,13 +18,41 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip musicIsPlay;
 
+    public void PlayMusicBackground(bool isPlayMusic)
+    {
+        if (isPlayMusic) { musicSource.Play();}
+        else
+        {
+            musicSource.Stop();
+        }
+    }
+    public void PlayMusic(int musicIndex)
+    {
+        musicSource.clip = musicSounds[musicIndex].clip;
+        musicSource.Play();
+    }
 
+   
+    private void OnEnable()
+    {
+
+        if (Instance != null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Instance = new AudioManager();
+        }
+
+        DontDestroyOnLoad(gameObject);
+    }
     void Start()
     {
         musicSource.clip = musicIsPlay;
         musicSource.Play();
 
-        if(musicSlider?.value != null && sfxSlider?.value != null)
+        if (musicSlider?.value != null && sfxSlider?.value != null)
         {
             if (PlayerPrefs.HasKey("musicVolume") && PlayerPrefs.HasKey("SFXVolume"))
             {

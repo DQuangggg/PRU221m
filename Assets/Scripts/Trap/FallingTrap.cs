@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FallingTrap : MonoBehaviour
+public class FallingTrap : TrapBase
 {
-    new Rigidbody2D rb;
+    Rigidbody2D rb;
     bool fall = false;
     public float gravity;
     public float mass;
-
+    private void Awake()
+    {
+        trapType = TrapType.Effect;
+    }
     void OnTriggerEnter2D(Collider2D collision)
     {
         rb = GetComponent<Rigidbody2D>();
