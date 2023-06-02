@@ -1,0 +1,1 @@
+public enum TrapType { Effect = 0, NoEffect }
