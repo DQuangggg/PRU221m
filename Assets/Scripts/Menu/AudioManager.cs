@@ -17,6 +17,7 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip musicIsPlay;
 
+
     void Start()
     {
         musicSource.clip = musicIsPlay;
