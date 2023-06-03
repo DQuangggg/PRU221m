@@ -18,6 +18,7 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip musicIsPlay;
 
+<<<<<<< HEAD
     public void PlayMusicBackground(bool isPlayMusic)
     {
         if (isPlayMusic) { musicSource.Play();}
@@ -47,6 +48,9 @@ public class AudioManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
+=======
+
+>>>>>>> 9a91ea8daba9adfea98ce3256ec67f0cb4972cdc
     void Start()
     {
         musicSource.clip = musicIsPlay;
