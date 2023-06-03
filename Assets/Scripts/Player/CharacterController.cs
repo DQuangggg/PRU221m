@@ -21,8 +21,6 @@ public class CharacterController : MonoBehaviour
 
     public GameObject gameOverScreen;
 
-
-
     public int hearts = 5;
 
     AudioManager audioManager;

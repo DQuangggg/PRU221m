@@ -12,6 +12,7 @@ public class TrapBase : MonoBehaviour
     private CharacterController character;
     private AudioManager audioManager;
     private GameOverScript gameOverScreen;
+
     private void Awake()
     {
         character = FindObjectOfType<CharacterController>();
@@ -39,7 +40,11 @@ public class TrapBase : MonoBehaviour
         {
             audioManager.PlayMusicBackground(false);
             audioManager.PlaySFX(audioManager.gameover);
+            JsonHandler handler = gameObject.AddComponent<JsonHandler>();
+            handler.data = new SavedPositionData();
+            handler.Save();
             GameOver();
+
         }
         else
         {
