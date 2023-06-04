@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SprintBuzzsaw : MonoBehaviour
+public class SprintBuzzsaw : TrapBase
 {
     public Transform point1, point2;
     private Transform pointTarget;
@@ -10,6 +10,7 @@ public class SprintBuzzsaw : MonoBehaviour
     void Start()
     {
         pointTarget = point1;
+        trapType = TrapType.Effect;
     }
 
     // Update is called once per frame

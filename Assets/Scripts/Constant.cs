@@ -1,1 +1,1 @@
-public enum TrapType { Effect = 0, NoEffect }
+public enum TrapType { Effect = 0, NoEffect = 1 }

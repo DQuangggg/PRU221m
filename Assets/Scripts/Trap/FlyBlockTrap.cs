@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyBlockTrap : MonoBehaviour
+public class FlyBlockTrap : TrapBase
 {
-    new Rigidbody2D rb;
+    Rigidbody2D rb;
     bool fly = false;
     public float gravity;
 
     private GameObject flyBlockPrefab;
     private Vector3 blockPosition;
 
+
     void Start()
     {
+        trapType = TrapType.NoEffect;
     }
 
     void OnTriggerEnter2D(Collider2D collision)

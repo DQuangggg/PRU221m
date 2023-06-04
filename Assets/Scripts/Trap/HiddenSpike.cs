@@ -17,6 +17,7 @@ public class HiddenSpike : TrapBase
 
     void Start()
     {
+        trapType = TrapType.Effect;
         destination = new Vector3(this.gameObject.transform.position.x + xMoveDistance, this.gameObject.transform.position.y + yMoveDistance);
     }
 

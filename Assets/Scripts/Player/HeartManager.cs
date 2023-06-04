@@ -7,10 +7,6 @@ using UnityEngine.UI;
 
 public class HeartManager : MonoBehaviour
 {
-    // public CharacterController characterController;
-    //public Sprite[] hearts;
-    //public Image image;
-
     [SerializeField]
     public int maxHealth;
     [SerializeField]

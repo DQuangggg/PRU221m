@@ -10,12 +10,14 @@ public class JsonHandler : MonoBehaviour
 
     private string file = "savedPosition.txt";
 
+    //Converts the data object into a JSON string , and then calls the WriteToFile() method to save the JSON string to a file.
     public void Save()
     {
         string json = JsonUtility.ToJson(data);
         WriteToFile(file, json);
     }
 
+    //Reads the JSON data from the file
     public void Load()
     {
         data = new SavedPositionData();
@@ -23,6 +25,8 @@ public class JsonHandler : MonoBehaviour
         JsonUtility.FromJsonOverwrite(json, data);
     }
 
+    //Writes the JSON string to a file specified by fileName
+    //Creates a new FileStream with the specified path and writes the JSON string using a StreamWriter
     private void WriteToFile(string fileName, string json)
     {
         try
@@ -43,6 +47,7 @@ public class JsonHandler : MonoBehaviour
 
     }
 
+    //Reads the contents of a file specified by fileName and returns it as a string
     private string ReadFromFile(string fileName)
     {
         try
