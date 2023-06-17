@@ -8,6 +8,7 @@ public class FallingTrap : TrapBase
     bool fall = false;
     public float gravity;
     public float mass;
+
     private void Awake()
     {
         character = FindObjectOfType<CharacterController>();

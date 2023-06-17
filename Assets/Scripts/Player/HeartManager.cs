@@ -7,9 +7,7 @@ using UnityEngine.UI;
 
 public class HeartManager : MonoBehaviour
 {
-    [SerializeField]
     public int maxHealth;
-    [SerializeField]
     public int numOfHearts;
 
     public GameObject[] heartss;

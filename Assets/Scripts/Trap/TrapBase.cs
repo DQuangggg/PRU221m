@@ -35,10 +35,10 @@ public class TrapBase : MonoBehaviour
             StartCoroutine(waiter());
         }
     }
-    IEnumerator waiter()
+    public IEnumerator waiter()
     {
         character.SetBodyType(RigidbodyType2D.Static);
-        yield return new WaitForSeconds(0.5f);
+       
         if (heartManager.health <= 0)
         {
             audioManager.PlayMusicBackground(false);
@@ -55,6 +55,7 @@ public class TrapBase : MonoBehaviour
             CheckpointRespawn();
             character.SetBodyType(RigidbodyType2D.Dynamic);
         }
+        yield return new WaitForSeconds(0.5f);
     }
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
