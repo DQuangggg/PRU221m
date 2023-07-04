@@ -60,7 +60,7 @@ public class CharacterController : MonoBehaviour
 
         facingRight = true;
 
-        audioManager.PlayMusicBackground(true);
+        audioManager.PlayMusicBackground(true); 
         Time.timeScale = 1;
 
         heartManager = gameObject.GetComponent<HeartManager>();
@@ -121,5 +121,18 @@ public class CharacterController : MonoBehaviour
     public Vector3 getCheckPointPassed()
     {
         return checkPointPassed;
+    }
+
+    public void nextLevel()
+    {
+        var currentScene = SceneManager.GetActiveScene().buildIndex;
+        if (currentScene == 4)
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+        else
+        {
+            SceneManager.LoadSceneAsync(++currentScene);
+        }
     }
 }

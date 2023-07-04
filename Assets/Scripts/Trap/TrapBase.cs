@@ -81,7 +81,14 @@ public class TrapBase : MonoBehaviour
         //respawn
         character.transform.position = new Vector3(character.getCheckPointPassed().x, character.getCheckPointPassed().y, 0);
         //minus HP
-        heartManager.MinusHeart();
+        if (gameObject.tag == "Trap")
+        {
+            heartManager.MinusHeart();
+        }
+        else if (gameObject.tag == "Boos") { 
+            heartManager.Boss();
+        }
+
     }
 }
 

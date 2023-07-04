@@ -77,6 +77,11 @@ public class HeartManager : MonoBehaviour
         ChangeHearts();
     }
 
+    public void Boss() {
+        health = 0;
+        ChangeHearts();
+    }
+
     //restore full health
     public void RestoreHealth()
     {
