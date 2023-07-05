@@ -40,7 +40,6 @@ public class TrapBase : MonoBehaviour
     {
         if (character != null && audioManager != null && heartManager != null)
         {
-            Debug.Log("cham orif");
             getName();
             character.SetDead(true);
             character.SetBodyType(RigidbodyType2D.Static);
@@ -70,6 +69,7 @@ public class TrapBase : MonoBehaviour
         else
         {
             character.SetDead(false);
+            character.SetBodyType(RigidbodyType2D.Static);
             CheckpointRespawn();
             character.SetBodyType(RigidbodyType2D.Dynamic);
         }
@@ -95,6 +95,7 @@ public class TrapBase : MonoBehaviour
         Time.timeScale = 0;
         if (gameOverScreen != null && !gameOverScreen.isActivated)
         {
+            Debug.Log("chet roi ne");
             gameOverScreen.Activate();
         }
     }
