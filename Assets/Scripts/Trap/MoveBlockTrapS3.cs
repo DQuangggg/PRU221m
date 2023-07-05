@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.MaterialProperty;
 
-public class MoveBlockTrapS3 : MonoBehaviour
+public class MoveBlockTrapS3 : TrapBase
 {
     new Rigidbody2D rb;
     bool fly = false;
@@ -13,6 +14,7 @@ public class MoveBlockTrapS3 : MonoBehaviour
 
     void Start()
     {
+        trapType = TrapType.NoEffect;
         movePosition = transform.position;
         move = (GameObject)Resources.Load(@"Prefabs\Fall2");
     }

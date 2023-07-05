@@ -65,15 +65,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4355238370584458466, guid: 6ad5e68d4024bb9448e4825067ca15d6, type: 3}
       propertyPath: yMoveDistance
-      value: 0.1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 4355238370584458466, guid: 6ad5e68d4024bb9448e4825067ca15d6, type: 3}
       propertyPath: xDistanceToMainCharacter
-      value: 0.01
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4355238370584458466, guid: 6ad5e68d4024bb9448e4825067ca15d6, type: 3}
       propertyPath: yDistanceToMainCharacter
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4355238370584458467, guid: 6ad5e68d4024bb9448e4825067ca15d6, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ad5e68d4024bb9448e4825067ca15d6, type: 3}

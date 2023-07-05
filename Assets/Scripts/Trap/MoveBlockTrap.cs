@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveBlockTrap : MonoBehaviour
+public class MoveBlockTrap : TrapBase
 {
     new Rigidbody2D rb;
     bool fly = false;
@@ -13,6 +13,7 @@ public class MoveBlockTrap : MonoBehaviour
     private Vector3 blockPosition;
 
     void Start() {
+        trapType = TrapType.NoEffect;
         blockPosition = transform.position;
         moveBlockPrefab = (GameObject)Resources.Load(@"Prefabs\FallTrap");
     }

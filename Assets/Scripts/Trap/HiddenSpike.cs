@@ -24,16 +24,16 @@ public class HiddenSpike : TrapBase
     // Update is called once per frame
     void Update()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player"); 
-        Debug.Log("Distance :" + Mathf.Abs(this.gameObject.transform.position.x - player.transform.position.x));
-        Debug.Log("Distance2 :" + Mathf.Abs(this.gameObject.transform.position.y - player.transform.position.y));
-
-        //Trap position to Player position
-        if (Mathf.Abs(this.gameObject.transform.position.x - player.transform.position.x) < xDistanceToMainCharacter ||
-            Mathf.Abs(this.gameObject.transform.position.y - player.transform.position.y) < yDistanceToMainCharacter)
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
         {
-            //Position when Trap move
-            transform.position = Vector3.MoveTowards(transform.position, destination, Time.deltaTime * 2);
+            //Trap position to Player position
+            if (Mathf.Abs(this.gameObject.transform.position.x - player.transform.position.x) < xDistanceToMainCharacter ||
+                Mathf.Abs(this.gameObject.transform.position.y - player.transform.position.y) < yDistanceToMainCharacter)
+            {
+                //Position when Trap move
+                transform.position = Vector3.MoveTowards(transform.position, destination, Time.deltaTime * 2);
+            }
         }
     }
 }

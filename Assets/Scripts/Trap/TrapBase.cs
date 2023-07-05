@@ -35,6 +35,24 @@ public class TrapBase : MonoBehaviour
             StartCoroutine(waiter());
         }
     }
+
+    public void bossAttacked()
+    {
+        if (character != null && audioManager != null && heartManager != null)
+        {
+            Debug.Log("cham orif");
+            getName();
+            character.SetDead(true);
+            character.SetBodyType(RigidbodyType2D.Static);
+            audioManager.PlayMusicBackground(false);
+            audioManager.PlaySFX(audioManager.gameover);
+            GameOver();
+
+            JsonHandler handler = gameObject.AddComponent<JsonHandler>();
+            handler.data = new SavedPositionData();
+            handler.Save();
+        }
+    }
     public IEnumerator waiter()
     {
         character.SetBodyType(RigidbodyType2D.Static);
@@ -57,13 +75,18 @@ public class TrapBase : MonoBehaviour
         }
         yield return new WaitForSeconds(0.5f);
     }
+
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
 
         if (collision.gameObject.tag == "Player")
         {
-            if (trapType == TrapType.Effect)
+            if (trapType == TrapType.Effect) {
                 attacked();
+            }
+            if (trapType == TrapType.Boss) {
+                bossAttacked();
+            }
         }
     }
 
@@ -81,14 +104,7 @@ public class TrapBase : MonoBehaviour
         //respawn
         character.transform.position = new Vector3(character.getCheckPointPassed().x, character.getCheckPointPassed().y, 0);
         //minus HP
-        if (gameObject.tag == "Trap")
-        {
-            heartManager.MinusHeart();
-        }
-        else if (gameObject.tag == "Boos") { 
-            heartManager.Boss();
-        }
-
+        heartManager.MinusHeart();
     }
 }
 

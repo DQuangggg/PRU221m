@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BossController : TrapBase
@@ -24,12 +25,12 @@ public class BossController : TrapBase
 
     private void Start()
     {
+        trapType = TrapType.Effect;
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         curentPoint = point2.transform;
 
     }
-
 
     public void ResetPosition()
     {
@@ -104,6 +105,7 @@ public class BossController : TrapBase
             isKilled = false;
         }
     }
+
 
     private void Awake()
     {
