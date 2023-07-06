@@ -7,9 +7,6 @@ using UnityEngine.UI;
 
 public class HeartManager : MonoBehaviour
 {
-    public delegate void HealthChangedDelegate(int newHealth);
-    public event HealthChangedDelegate OnHealthChanged;
-
     public int maxHealth;
     public int numOfHearts;
 
@@ -50,14 +47,8 @@ public class HeartManager : MonoBehaviour
             numOfHearts = maxHealth;
         }
     }
-    public void ChangeHealth(int newHealth)
-    {
-        health = newHealth;
-        if (OnHealthChanged != null)
-        {
-            OnHealthChanged.Invoke(health);
-        }
-    }
+
+    
     // Update is called once per frame
     void Update()
     {
