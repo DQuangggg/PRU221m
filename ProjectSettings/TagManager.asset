@@ -18,6 +18,7 @@ TagManager:
   - Ladder
   - Audio
   - Boos
+  - Support
   layers:
   - Default
   - TransparentFX

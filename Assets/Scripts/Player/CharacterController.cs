@@ -40,6 +40,27 @@ public class CharacterController : MonoBehaviour
         }
         audioManager = FindObjectOfType<AudioManager>();
     }
+
+    private List<IObserver> observers = new List<IObserver>();
+
+    public void AddObserver(IObserver observer)
+    {
+        observers.Add(observer);
+    }
+
+    public void RemoveObserver(IObserver observer)
+    {
+        observers.Remove(observer);
+    }
+
+    private void NotifyObservers()
+    {
+        foreach (var observer in observers)
+        {
+            observer.Update();
+        }
+    }
+
     public Transform getTranform()
     {
         return gameObject.transform;
@@ -115,7 +136,11 @@ public class CharacterController : MonoBehaviour
         if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Hazard")
         {
             grounded = true;
-
+        }
+        if (collision.gameObject.tag == "Support")
+        {
+            grounded = true;
+            NotifyObservers();
         }
     }
     public Vector3 getCheckPointPassed()
