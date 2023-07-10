@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyProjecttitle : MonoBehaviour
+public class EnemyProjecttitle : TrapBase
 {
     [SerializeField] private float speed;
     [SerializeField] private float resetTime;
     private float lifetime;
     public void ActivateProjectile()
     {
+        trapType = TrapType.Effect;
         lifetime = 0;
         gameObject.SetActive(true);
     }
