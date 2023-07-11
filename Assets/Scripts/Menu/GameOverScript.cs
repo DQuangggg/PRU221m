@@ -5,17 +5,18 @@ using UnityEngine;
 public class GameOverScript : MonoBehaviour
 {
     public bool isActivated = false;
+    [SerializeField] private GameObject wrapper;
+
 
     private void Awake()
     {
-        gameObject.SetActive(false);
+        wrapper.SetActive(isActivated);
     }
+
     public void Activate()
     {
-        if (!isActivated)
-        {
-            isActivated = true;
-            gameObject.SetActive(true);
-        }
+        isActivated = true;
+        wrapper.SetActive(isActivated);
+        Time.timeScale = 0;
     }
 }

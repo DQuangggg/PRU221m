@@ -47,7 +47,7 @@ public class FallingTrap : TrapBase
         {
             gameObject.tag = "Trap";
         }
-        if (collision.gameObject != null && collision.gameObject.tag == "Player")
+        if (/*collision.gameObject != null &&*/ collision.gameObject.tag == "Player")
         {
             attacked();
         }
