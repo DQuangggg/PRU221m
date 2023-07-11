@@ -6,6 +6,7 @@ using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
+using UnityEngine.TextCore.Text;
 
 public class CharacterController : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class CharacterController : MonoBehaviour
 
     private HeartManager heartManager;
     public Vector3 checkPointPassed;
-    public bool isActiveTrap = false;
+    public bool IsDead { get; set; } = false;
 
     private void Awake()
     {
@@ -96,6 +97,7 @@ public class CharacterController : MonoBehaviour
     }
     public void SetDead(bool status)
     {
+        IsDead = true;
         animator = GetComponent<Animator>();
         animator.SetBool("dead", status);
     }
@@ -160,14 +162,6 @@ public class CharacterController : MonoBehaviour
             grounded = true;
             NotifyObservers();
         }
-        //if(collision.gameObject.tag == "Trap")
-        //{
-        //    isActiveTrap = true;
-        //}
-        //if (isActiveTrap && collision.gameObject.tag != "Ground")
-        //{
-        //    collision.rigidbody.isKinematic = true;
-        //}
     }
     public Vector3 getCheckPointPassed()
     {
@@ -185,5 +179,18 @@ public class CharacterController : MonoBehaviour
         {
             SceneManager.LoadSceneAsync(++currentScene);
         }
+    }
+
+    public void Teleport()
+    {
+        StartCoroutine(StartTeleport());
+    }
+
+    private IEnumerator StartTeleport()
+    {
+        yield return new WaitForSeconds(0.5f);
+        transform.position = new Vector3(getCheckPointPassed().x, getCheckPointPassed().y, 0);
+        AllowInput(true);
+
     }
 }

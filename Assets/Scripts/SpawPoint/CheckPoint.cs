@@ -17,6 +17,7 @@ public class CheckPoint : MonoBehaviour
         GameObject touchedObject = collision.gameObject;
         if (touchedObject.tag == "Player")
         {
+            Debug.Log("check checkpoint");
             touchedObject.GetComponent<CharacterController>().checkPointPassed = transform.position;
 
             UpdateSavedPositionFile();
