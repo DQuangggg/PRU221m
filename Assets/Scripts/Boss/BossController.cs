@@ -25,7 +25,7 @@ public class BossController : TrapBase
 
     private void Start()
     {
-        trapType = TrapType.Boss;
+        trapType = TrapType.Effect;
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         curentPoint = point2.transform;
@@ -46,11 +46,10 @@ public class BossController : TrapBase
             //transform.LookAt(target);
             transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
-            if (target.position.x > transform.position.x)
+            if(target.position.x > transform.position.x )
             {
                 sr.flipX = true;
-            }
-            else
+            } else
             {
                 sr.flipX = false;
             }
@@ -95,7 +94,7 @@ public class BossController : TrapBase
             ladder2.gameObject.SetActive(false);
         }
     }
-    protected override void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("CircleKillBoss"))
         {
@@ -105,10 +104,6 @@ public class BossController : TrapBase
         {
             isKilled = false;
         }
-        if (collision.gameObject != null && collision.gameObject.tag == "Player")
-        {
-            bossAttacked();
-        }
     }
 
 
@@ -116,10 +111,6 @@ public class BossController : TrapBase
     {
         ladder1.gameObject.SetActive(false);
         ladder2.gameObject.SetActive(false);
-        character = FindObjectOfType<CharacterController>();
-        audioManager = FindObjectOfType<AudioManager>();
-        heartManager = FindObjectOfType<HeartManager>();
-        gameOverScreen = FindObjectOfType<GameOverScript>();
     }
 
     public void SetFollow()

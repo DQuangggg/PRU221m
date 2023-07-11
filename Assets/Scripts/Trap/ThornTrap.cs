@@ -8,7 +8,6 @@ public class ThornTrap : TrapBase
     void Start()
     {
         trapType = TrapType.Effect;
-        
     }
 
     // Update is called once per frame

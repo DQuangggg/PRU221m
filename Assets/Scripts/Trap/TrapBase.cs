@@ -12,8 +12,6 @@ public class TrapBase : MonoBehaviour
     protected CharacterController character;
     protected AudioManager audioManager;
     protected GameOverScript gameOverScreen;
-    protected bool isInvicible = false;
-    protected bool isDelay = false;
     private void Awake()
     {
         character = FindObjectOfType<CharacterController>();
@@ -44,24 +42,26 @@ public class TrapBase : MonoBehaviour
         {
             getName();
             character.SetDead(true);
-            Instantiate(character.getBlood(), character.transform.position, character.transform.rotation);
-            audioManager.PlaySFX(audioManager.dead2);
-            heartManager.health = 0;
-            StartCoroutine(waiter());
+            character.SetBodyType(RigidbodyType2D.Static);
+            audioManager.PlayMusicBackground(false);
+            audioManager.PlaySFX(audioManager.gameover);
+            GameOver();
+
+            JsonHandler handler = gameObject.AddComponent<JsonHandler>();
+            handler.data = new SavedPositionData();
+            handler.Save();
         }
     }
     public IEnumerator waiter()
     {
         character.SetBodyType(RigidbodyType2D.Static);
-        character.AllowInput(false);
+       
         if (heartManager.health <= 0)
-        {  character.AllowInput(false);
-            character.SetBodyType(RigidbodyType2D.Static);
-
-            character.SetBodyType(RigidbodyType2D.Dynamic);
+        {
             audioManager.PlayMusicBackground(false);
             audioManager.PlaySFX(audioManager.gameover);
             GameOver();
+
             JsonHandler handler = gameObject.AddComponent<JsonHandler>();
             handler.data = new SavedPositionData();
             handler.Save();
@@ -69,12 +69,11 @@ public class TrapBase : MonoBehaviour
         else
         {
             character.SetDead(false);
-            isInvicible = true;
             character.SetBodyType(RigidbodyType2D.Static);
-            character.SetBodyType(RigidbodyType2D.Dynamic);
             CheckpointRespawn();
+            character.SetBodyType(RigidbodyType2D.Dynamic);
         }
-        yield return new WaitForSeconds(0f);
+        yield return new WaitForSeconds(0.5f);
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
@@ -82,12 +81,10 @@ public class TrapBase : MonoBehaviour
 
         if (collision.gameObject.tag == "Player")
         {
-            if (trapType == TrapType.Effect)
-            {
+            if (trapType == TrapType.Effect) {
                 attacked();
             }
-            if (trapType == TrapType.Boss)
-            {
+            if (trapType == TrapType.Boss) {
                 bossAttacked();
             }
         }
@@ -95,65 +92,20 @@ public class TrapBase : MonoBehaviour
 
     public void GameOver()
     {
-        StartCoroutine(DisplayGameOverScreen());
+        Time.timeScale = 0;
+        if (gameOverScreen != null && !gameOverScreen.isActivated)
+        {
+            Debug.Log("chet roi ne");
+            gameOverScreen.Activate();
+        }
     }
 
     public void CheckpointRespawn()
     {
-        StartCoroutine(RespawnAfterDelay());
-    }
-    public IEnumerator RespawnAfterDelay()
-    {
-        Debug.Log("Enter to RespawnAfterDelay");
-        if (!isDelay)
-        {       
-            heartManager.MinusHeart();
-            isDelay = true;
-            character.AllowInput(false);
-            //Chạy được đến đây
-            yield return new WaitForSeconds(0.5f); 
-            character.AllowInput(true);
-            character.transform.position = new Vector3(character.getCheckPointPassed().x, character.getCheckPointPassed().y, 0);
-            //character.tag = "Player";
-            yield return new WaitForSeconds(0.5f);
-            isDelay = false;
-            // Respawn
-            // Minus HP
-            
-        }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        // Kiểm tra nếu đối tượng va chạm không phải là Ground và không phải là đối tượng nhân vật người chơi
-        if (other.gameObject.CompareTag("Ground") == false && other.gameObject != character.gameObject)
-        {
-            // Thực hiện hành động mà bạn mong muốn ở đây
-            // Ví dụ: loại bỏ khả năng va chạm của đối tượng
-            Physics.IgnoreCollision(other, GetComponent<Collider>());
-        }
-    }
-    public void OnBecameInvisible()
-    {
-        if (isDelay)
-        {
-            if (heartManager.health > 0)
-            {
-                character.AllowInput(true);
-                character.transform.position = new Vector3(character.getCheckPointPassed().x, character.getCheckPointPassed().y, 0);
-                //yield return new WaitForSeconds(0.5f);
-                isDelay = false;
-            }
-            else
-            {
-                //yield return new WaitForSeconds(0.5f);
-                gameOverScreen.Activate();
-            }
-        }
-    }
-    public IEnumerator DisplayGameOverScreen()
-    { 
-        yield return new WaitForSeconds(0.5f);
-        gameOverScreen.Activate();
+        //respawn
+        character.transform.position = new Vector3(character.getCheckPointPassed().x, character.getCheckPointPassed().y, 0);
+        //minus HP
+        heartManager.MinusHeart();
     }
 }
 
