@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,23 +34,47 @@ public class FallingTrap : TrapBase
                 rb.gravityScale = gravity;
                 rb.mass = mass;
                 fall = true;
+                StartCoroutine(Disappear());
             }
         }
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Hazard")
-        {
-            gameObject.SetActive(false);
-        }
+       
         if (collision.gameObject.tag == "Trap")
         {
             gameObject.tag = "Trap";
         }
-        if (/*collision.gameObject != null &&*/ collision.gameObject.tag == "Player")
+        if ( collision.gameObject.tag == "Player"
+            && canAttack == true && character.isAllowInput)
         {
             attacked();
+           
         }
     }
+
+    private IEnumerator Disappear()
+    {
+        yield return new WaitForSeconds(1f);
+        gameObject.SetActive(false);
+
+    }
+
+    private void OnBecameInvisible()
+    {
+        if (isDelay)
+        {
+            if (heartManager.health > 0)
+            {
+                character.Teleport();
+
+                isDelay = false;
+                canAttack = true;
+            }
+
+        }
+    }
+
+  
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,12 @@ public class GameOverScript : MonoBehaviour
 
     public void Activate()
     {
+        StartCoroutine(ShowGameOver());
+    }
+
+    private IEnumerator ShowGameOver()
+    {
+       yield return new WaitForSeconds(1f);
         isActivated = true;
         wrapper.SetActive(isActivated);
         Time.timeScale = 0;
