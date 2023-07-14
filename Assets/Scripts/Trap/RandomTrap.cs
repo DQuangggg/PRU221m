@@ -1,24 +1,26 @@
+using Assets.Scripts.Trap;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomTrap : TrapBase
+public class RandomTrap : MonoBehaviour
 {
     public GameObject trapPrefab;
     public Transform[] trapPositions;
+    private TrapFactory trapFactory;
 
     void Start()
     {
-        trapType = TrapType.Effect;
-
-        int randomIndex = Random.Range(0, trapPositions.Length);
-        Vector3 trapPosition = trapPositions[randomIndex].position;
-        Instantiate(trapPrefab, trapPosition, Quaternion.identity);
+        trapFactory = new TrapFactory();
+        CreateTrapNew();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void CreateTrapNew()
     {
-
+        Trap trap = trapFactory.CreateTrap();
+        RandomSpikeTrap randomTrap = (RandomSpikeTrap)trap;
+        randomTrap._trapPrefab = trapPrefab;
+        randomTrap.trapPositions = trapPositions;
+        randomTrap.Activate(TrapType.Effect); 
     }
 }
